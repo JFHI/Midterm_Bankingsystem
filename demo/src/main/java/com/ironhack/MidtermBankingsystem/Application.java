@@ -1,13 +1,13 @@
-package com.example.demo;
+package com.ironhack.MidtermBankingsystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MidtermBankingsystemApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MidtermBankingsystemApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
