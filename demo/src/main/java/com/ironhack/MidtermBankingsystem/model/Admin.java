@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@DiscriminatorValue("1")
+@DiscriminatorValue("admin")
 public class Admin extends AccountHolder{
 
-    @Id
+
     private String adminId;
 
     @OneToMany(mappedBy = "admittedBy")
@@ -25,9 +25,20 @@ public class Admin extends AccountHolder{
         super(accountHolderId, fName, lName, dateOfBirth, street, zipCode, city, country);
     }
 
+
+
     public Admin(String adminId, List<Checking> checkingAccountsAdmitted) {
         this.adminId = adminId;
         this.checkingAccountsAdmitted = checkingAccountsAdmitted;
+    }
+
+    public Admin(String adminId) {
+        this.adminId = adminId;
+    }
+
+    public Admin(Integer accountHolderId, String fName, String lName, Date dateOfBirth, String street, Integer zipCode, String city, String country, String adminId) {
+        super(accountHolderId, fName, lName, dateOfBirth, street, zipCode, city, country);
+        this.adminId = adminId;
     }
 
     public Admin(Integer accountHolderId, String fName, String lName, Date dateOfBirth, String street, Integer zipCode, String city, String country, String adminId, List<Checking> checkingAccountsAdmitted) {
