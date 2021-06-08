@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Date;
-import java.text.DateFormat;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,12 +32,12 @@ class AccountRepositoryTest {
     @BeforeEach
     void setUp(){
 
-        AccountHolder owner1 = new AccountHolder(1, "Lieschen", "Müller", new Date (1999,9,9), "Hofplatz 16", 25879, "Hofhausen", "Hofland" );
+        AccountHolder owner1 = new AccountHolder ("Lieschen", "Müller", LocalDate.of(1999,12,12), "Hofplatz 16", 25879, "Hofhausen", "Hofland" );
         accountHolderRepository.save(owner1);
 
-        Admin admin1 = new Admin(1, "Pipi", "Langstrumpf", new Date(1999,9,9), "Villa Kunterbunt 12",25896,"Lostadt","Lolan","ad1");
+        Admin admin1 = new Admin("Pipi", "Langstrumpf", LocalDate.of(2002,06,06), "Villa Kunterbunt 12",25896,"Lostadt","Lolan");
         adminRepository.save(admin1);
-
+        
 
         Account account1 = new Checking(123654, AccountStatus.ACTIVE, owner1,admin1);
         accountRepository. save(account1);
