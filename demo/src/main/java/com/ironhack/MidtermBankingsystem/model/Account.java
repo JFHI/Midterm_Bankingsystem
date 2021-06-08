@@ -1,13 +1,18 @@
 package com.ironhack.MidtermBankingsystem.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="account_type",
+        discriminatorType = DiscriminatorType.INTEGER)
+
 public class Account {
 
-    //Id ? Braucht man ja eigentlich nicht > Account als parent class existiert ja nur übergeordnet und soll zur Vererbung dienen
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private Integer secretKey;          //PIN oder Passwort
     private BigDecimal balance;
@@ -18,12 +23,21 @@ public class Account {
     public Account() {
     }
 
-    public Account(Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate) {
+    public Account(Integer id, Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate) {
+        this.id = id;
         this.secretKey = secretKey;
         this.balance = balance;
         this.penaltyFee = penaltyFee;
         this.monthlyMaintanceFee = monthlyMaintanceFee;
         this.interestRate = interestRate;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getSecretKey() {
