@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 @DiscriminatorValue("2")
 public class Checking extends Account {
 
-    @Id
     private Integer checkingNumber;         //Kontonr.
 
     @Enumerated(value = EnumType.STRING)

@@ -5,9 +5,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="account_type",
-        discriminatorType = DiscriminatorType.INTEGER)
-
+@DiscriminatorColumn(name="account_type", discriminatorType = DiscriminatorType.STRING)
 public class Account {
 
     @Id

@@ -10,7 +10,6 @@ import java.util.List;
 @DiscriminatorValue("1")
 public class Admin extends AccountHolder{
 
-    @Id
     private String adminId;
 
     @OneToMany(mappedBy = "admittedBy")
