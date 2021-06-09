@@ -28,19 +28,25 @@ public class Checking extends Account {
     }
 
 
-    public Checking(Integer checkingNumber, AccountStatus status, AccountHolder ownedBy) {
+    public Checking(BigDecimal balance, Integer checkingNumber, AccountStatus status, AccountHolder ownedBy) {
         this.checkingNumber = checkingNumber;
         this.status = status;
         this.ownedBy = ownedBy;
+        setBalance(balance);
     }
 
     @Override
     public void setBalance(BigDecimal balance) {
-        if (BigDecimal.valueOf(balance)<BigDecimal.valueOf(250)) {
-
+        BigDecimal vgl = new BigDecimal(250);
+        if (balance.compareTo(BigDecimal.valueOf(250))<0){
+           super.setBalance(balance.subtract(getPenaltyFee()));
+            System.out.println();
+        } else{
+            super.setBalance(balance);
         }
-        super.setBalance(balance);
     }
+
+
 
     //Getter und Setter
     public Integer getCheckingNumber() {

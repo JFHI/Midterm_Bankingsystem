@@ -39,15 +39,14 @@ class AccountRepositoryTest {
         adminRepository.save(admin1);
 
 
-        Account account1 = new Checking(123654, AccountStatus.ACTIVE, owner1);
+        Account account1 = new Checking(BigDecimal.valueOf(280), 123654, AccountStatus.ACTIVE, owner1);
         accountRepository. save(account1);
 
         Account account2 = new CreditCard(159753, AccountStatus.FROZEN, BigDecimal.valueOf(100000), owner1);
         accountRepository.save(account2);
 
         Account account3 = new Saving(7889654, AccountStatus.ACTIVE, owner1);
-        Account acc = accountRepository.save(account3);
-        System.out.println(acc.getId());
+        accountRepository.save(account3);
         System.out.println(account3.getId());
 
     }
