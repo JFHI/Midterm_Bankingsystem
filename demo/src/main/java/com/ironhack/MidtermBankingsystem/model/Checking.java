@@ -4,54 +4,55 @@ import com.ironhack.MidtermBankingsystem.enums.AccountStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Formatter;
+import java.util.Random;
 
 @Entity
 @DiscriminatorValue("checking")
 public class Checking extends Account {
 
-    private Integer checkingNumber;         //Kontonr.
+    private Integer checkingNumber;
+    private final BigDecimal monthlyMaintanceFeemonthlyMaintanceFeeChecking = BigDecimal.valueOf(12);
 
     @Enumerated(value = EnumType.STRING)
     private AccountStatus status;
+
 
     @ManyToOne()
     @JoinColumn (name = "owned_by")
     private AccountHolder ownedBy;
 
-    @ManyToOne()
-    @JoinColumn (name = "admitted_by")
-    private Admin admittedBy;               //soll AdminId sein
 
 
     public Checking() {
     }
 
 
-    public Checking(Integer id, Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate) {
-        super(id, secretKey, balance, penaltyFee, monthlyMaintanceFee, interestRate);
-    }
-
-    public Checking(Integer checkingNumber, AccountStatus status, AccountHolder ownedBy, Admin admittedBy) {
+    public Checking(Integer checkingNumber, AccountStatus status, AccountHolder ownedBy) {
         this.checkingNumber = checkingNumber;
         this.status = status;
         this.ownedBy = ownedBy;
-        this.admittedBy = admittedBy;
     }
 
-    public Checking(Integer id, Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate, Integer checkingNumber, AccountStatus status, AccountHolder ownedBy, Admin admittedBy) {
-        super(id, secretKey, balance, penaltyFee, monthlyMaintanceFee, interestRate);
-        this.checkingNumber = checkingNumber;
-        this.status = status;
-        this.ownedBy = ownedBy;
-        this.admittedBy = admittedBy;
+    @Override
+    public void setBalance(BigDecimal balance) {
+        if (BigDecimal.valueOf(balance)<BigDecimal.valueOf(250)) {
+
+        }
+        super.setBalance(balance);
     }
 
+    //Getter und Setter
     public Integer getCheckingNumber() {
         return checkingNumber;
     }
 
     public void setCheckingNumber(Integer checkingNumber) {
         this.checkingNumber = checkingNumber;
+    }
+
+    public BigDecimal getMonthlyMaintanceFeemonthlyMaintanceFeeChecking() {
+        return monthlyMaintanceFeemonthlyMaintanceFeeChecking;
     }
 
     public AccountStatus getStatus() {
@@ -62,5 +63,11 @@ public class Checking extends Account {
         this.status = status;
     }
 
+    public AccountHolder getOwnedBy() {
+        return ownedBy;
+    }
 
+    public void setOwnedBy(AccountHolder ownedBy) {
+        this.ownedBy = ownedBy;
+    }
 }

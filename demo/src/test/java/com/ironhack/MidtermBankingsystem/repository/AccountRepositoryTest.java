@@ -1,16 +1,14 @@
 package com.ironhack.MidtermBankingsystem.repository;
 
 import com.ironhack.MidtermBankingsystem.enums.AccountStatus;
-import com.ironhack.MidtermBankingsystem.model.Account;
-import com.ironhack.MidtermBankingsystem.model.AccountHolder;
-import com.ironhack.MidtermBankingsystem.model.Admin;
-import com.ironhack.MidtermBankingsystem.model.Checking;
+import com.ironhack.MidtermBankingsystem.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -29,6 +27,8 @@ class AccountRepositoryTest {
     AdminRepository adminRepository;
 
 
+
+
     @BeforeEach
     void setUp(){
 
@@ -37,10 +37,18 @@ class AccountRepositoryTest {
 
         Admin admin1 = new Admin("Pipi", "Langstrumpf", LocalDate.of(2002,06,06), "Villa Kunterbunt 12",25896,"Lostadt","Lolan");
         adminRepository.save(admin1);
-        
 
-        Account account1 = new Checking(123654, AccountStatus.ACTIVE, owner1,admin1);
+
+        Account account1 = new Checking(123654, AccountStatus.ACTIVE, owner1);
         accountRepository. save(account1);
+
+        Account account2 = new CreditCard(159753, AccountStatus.FROZEN, BigDecimal.valueOf(100000), owner1);
+        accountRepository.save(account2);
+
+        Account account3 = new Saving(7889654, AccountStatus.ACTIVE, owner1);
+        Account acc = accountRepository.save(account3);
+        System.out.println(acc.getId());
+        System.out.println(account3.getId());
 
     }
 
@@ -49,7 +57,7 @@ class AccountRepositoryTest {
     @Test
     void findAll(){
         List<Account> accountList = accountRepository.findAll();
-        assertEquals(1, accountList.size());
+        assertEquals(3, accountList.size());
     }
 
 

@@ -3,6 +3,7 @@ package com.ironhack.MidtermBankingsystem.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -11,11 +12,6 @@ import java.util.List;
 @DiscriminatorValue("admin")
 public class Admin extends AccountHolder{
 
-
-
-//    @OneToMany(mappedBy = "admittedBy")
-//    @JsonIgnore
-//    private List<Checking> checkingAccountsAdmitted;        //Anzeigen aller ckecking accounts, die ein Admin betreut
 
 
     public Admin() {

@@ -1,5 +1,8 @@
 package com.ironhack.MidtermBankingsystem.model;
 
+import com.ironhack.MidtermBankingsystem.utils.Utils;
+import org.springframework.beans.factory.annotation.Value;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -13,23 +16,28 @@ public abstract class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer secretKey;          //PIN oder Passwort
-    private BigDecimal balance;
-    private BigDecimal penaltyFee;
+
+    private Integer secretKey = Utils.RandomSecretKey();
+
+    private BigDecimal balance = BigDecimal.valueOf(0);
+    private BigDecimal penaltyFee = BigDecimal.valueOf(40);
     private BigDecimal monthlyMaintanceFee;
     private BigDecimal interestRate;
 
     public Account() {
     }
 
-    public Account(Integer id, Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate) {
-        this.id = id;
-        this.secretKey = secretKey;
+
+    public Account(BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate) {
+        setSecretKey(Utils.RandomSecretKey());
         this.balance = balance;
-        this.penaltyFee = penaltyFee;
         this.monthlyMaintanceFee = monthlyMaintanceFee;
         this.interestRate = interestRate;
+        this.penaltyFee = penaltyFee;
     }
+
+
+//    GETTER und SETTER
 
     public Integer getId() {
         return id;
@@ -39,12 +47,12 @@ public abstract class Account {
         this.id = id;
     }
 
-    public Integer getSecretKey() {
-        return secretKey;
-    }
-
     public void setSecretKey(Integer secretKey) {
         this.secretKey = secretKey;
+    }
+
+    public Integer getSecretKey() {
+        return secretKey;
     }
 
     public BigDecimal getBalance() {
