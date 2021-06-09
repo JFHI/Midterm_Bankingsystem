@@ -21,16 +21,25 @@ public class Saving extends Account {
     public Saving() {
     }
 
-    public Saving (Integer savingNumber, AccountStatus status, AccountHolder ownedBy) {
+    public Saving (BigDecimal balance, Integer savingNumber, AccountStatus status, AccountHolder ownedBy) {
         this.savingNumber = savingNumber;
         this.status = status;
         this.ownedBy = ownedBy;
+        setBalance(balance);
     }
-//
-//    public Saving(Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate, Integer savingNumber, AccountStatus status, AccountHolder ownedBy) {
-//        super(secretKey, balance, penaltyFee, monthlyMaintanceFee, interestRate);
-//        this.savingNumber = savingNumber;
-//        this.status = status;
-//        this.ownedBy = ownedBy;
-//    }
+
+
+
+    @Override
+    public void setBalance(BigDecimal balance) {
+        BigDecimal vgl = new BigDecimal(100);
+        if (balance.compareTo(BigDecimal.valueOf(100))<0){
+            super.setBalance(balance.subtract(getPenaltyFee()));
+            System.out.println();
+        } else{
+            super.setBalance(balance);
+        }
+    }
+
+
 }
