@@ -21,17 +21,15 @@ public abstract class Account {
 
     private BigDecimal balance = BigDecimal.valueOf(0);
     private BigDecimal penaltyFee = BigDecimal.valueOf(40);
-    private BigDecimal monthlyMaintanceFee;
     private BigDecimal interestRate;
 
     public Account() {
     }
 
 
-    public Account(BigDecimal balance, BigDecimal penaltyFee, BigDecimal monthlyMaintanceFee, BigDecimal interestRate) {
+    public Account(BigDecimal balance, BigDecimal penaltyFee, BigDecimal interestRate) {
         setSecretKey(Utils.RandomSecretKey());
         this.balance = balance;
-        this.monthlyMaintanceFee = monthlyMaintanceFee;
         this.interestRate = interestRate;
         this.penaltyFee = penaltyFee;
     }
@@ -71,13 +69,6 @@ public abstract class Account {
         this.penaltyFee = penaltyFee;
     }
 
-    public BigDecimal getMonthlyMaintanceFee() {
-        return monthlyMaintanceFee;
-    }
-
-    public void setMonthlyMaintanceFee(BigDecimal monthlyMaintanceFee) {
-        this.monthlyMaintanceFee = monthlyMaintanceFee;
-    }
 
     public BigDecimal getInterestRate() {
         return interestRate;
