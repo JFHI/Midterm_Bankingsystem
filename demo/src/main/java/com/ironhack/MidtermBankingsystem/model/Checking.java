@@ -1,6 +1,7 @@
 package com.ironhack.MidtermBankingsystem.model;
 
 import com.ironhack.MidtermBankingsystem.enums.AccountStatus;
+import com.ironhack.MidtermBankingsystem.utils.Utils;
 import org.hibernate.annotations.Target;
 
 import javax.persistence.*;
@@ -16,6 +17,8 @@ public class Checking extends Account {
 
     private BigDecimal monthlyMaintanceFee = BigDecimal.valueOf(12);
 
+    private BigDecimal interestRate = BigDecimal.valueOf(0);
+
     @Enumerated(value = EnumType.STRING)
     private AccountStatus status;
 
@@ -30,8 +33,8 @@ public class Checking extends Account {
     }
 
 
-    public Checking(BigDecimal balance, Integer checkingNumber, AccountStatus status, AccountHolder ownedBy) {
-        this.checkingNumber = checkingNumber;
+    public Checking(BigDecimal balance, AccountStatus status, AccountHolder ownedBy) {
+        setCheckingNumber(Utils.RandomCheckingNumber());
         this.status = status;
         this.ownedBy = ownedBy;
         setBalance(balance);
@@ -47,6 +50,8 @@ public class Checking extends Account {
             super.setBalance(balance);
         }
     }
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.ironhack.MidtermBankingsystem.model;
 
 import com.ironhack.MidtermBankingsystem.enums.AccountStatus;
+import com.ironhack.MidtermBankingsystem.utils.Utils;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,6 +14,7 @@ public class CreditCard extends Account{
     @Enumerated(value = EnumType.STRING)
     private AccountStatus status;
     private BigDecimal creditLimit;
+    private BigDecimal interestRate= BigDecimal.valueOf(0.2);
 
     @ManyToOne()
     @JoinColumn (name = "owned_by")
@@ -24,8 +26,8 @@ public class CreditCard extends Account{
     }
 
 
-    public CreditCard(Integer creditCardNumber, AccountStatus status, BigDecimal creditLimit, AccountHolder ownedBy) {
-        this.creditCardNumber= creditCardNumber;
+    public CreditCard(AccountStatus status, BigDecimal creditLimit, AccountHolder ownedBy) {
+        setCreditCardNumber(Utils.RandomCreditCardNumber());
         this.status = status;
         this.creditLimit = creditLimit;
         this.ownedBy = ownedBy;

@@ -23,9 +23,6 @@ class AccountRepositoryTest {
     @Autowired
     AccountHolderRepository accountHolderRepository;
 
-    @Autowired
-    AdminRepository adminRepository;
-
 
 
 
@@ -35,14 +32,14 @@ class AccountRepositoryTest {
         AccountHolder owner1 = new AccountHolder ("Lieschen", "Müller", LocalDate.of(1999,12,12), "Hofplatz 16", 25879, "Hofhausen", "Hofland" );
         accountHolderRepository.save(owner1);
 
-        Admin admin1 = new Admin("Pipi", "Langstrumpf", LocalDate.of(2002,06,06), "Villa Kunterbunt 12",25896,"Lostadt","Lolan");
-        adminRepository.save(admin1);
+        AccountHolder admin1 = new Admin("Pipi", "Langstrumpf", LocalDate.of(2002,06,06), "Villa Kunterbunt 12",25896,"Lostadt","Lolan");
+        accountHolderRepository.save(admin1);
 
 
-        Account account1 = new Checking(BigDecimal.valueOf(280), 123654, AccountStatus.ACTIVE, owner1);
+        Account account1 = new Checking(BigDecimal.valueOf(280), AccountStatus.ACTIVE, owner1);
         accountRepository. save(account1);
 
-        Account account2 = new CreditCard(159753, AccountStatus.FROZEN, BigDecimal.valueOf(100000), owner1);
+        Account account2 = new CreditCard(AccountStatus.FROZEN, BigDecimal.valueOf(100000), owner1);
         accountRepository.save(account2);
 
         Account account3 = new Saving(BigDecimal.valueOf(90),7889654, AccountStatus.ACTIVE, owner1);
@@ -60,5 +57,11 @@ class AccountRepositoryTest {
     }
 
 
+//    @Test
+//    void findByStatus(){
+//        List<Account> statusList = accountRepository.findByStatus(AccountStatus.ACTIVE);
+//        assertEquals(2, 2);
+//    }
+//    // > hat nicht funktioniert
 
 }

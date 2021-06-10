@@ -32,7 +32,10 @@ public abstract class Account {
         this.balance = balance;
         this.interestRate = interestRate;
         this.penaltyFee = penaltyFee;
+
     }
+
+
 
 
 //    GETTER und SETTER
