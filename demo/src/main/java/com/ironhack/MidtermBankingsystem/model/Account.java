@@ -1,5 +1,6 @@
 package com.ironhack.MidtermBankingsystem.model;
 
+import com.ironhack.MidtermBankingsystem.enums.AccountStatus;
 import com.ironhack.MidtermBankingsystem.utils.Utils;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -16,6 +17,8 @@ public abstract class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Enumerated(value = EnumType.STRING)
+    private AccountStatus status;
 
     private Integer secretKey = Utils.RandomSecretKey();
 
@@ -35,7 +38,14 @@ public abstract class Account {
 
     }
 
-
+    public Account(Integer id, AccountStatus status, Integer secretKey, BigDecimal balance, BigDecimal penaltyFee, BigDecimal interestRate) {
+        this.id = id;
+        this.status = status;
+        this.secretKey = secretKey;
+        this.balance = balance;
+        this.penaltyFee = penaltyFee;
+        this.interestRate = interestRate;
+    }
 
 
 //    GETTER und SETTER
@@ -79,5 +89,13 @@ public abstract class Account {
 
     public void setInterestRate(BigDecimal interestRate) {
         this.interestRate = interestRate;
+    }
+
+    public AccountStatus getStatus(){
+        return status;
+    }
+
+    public void setStatus(AccountStatus status){
+        this.status = status;
     }
 }
