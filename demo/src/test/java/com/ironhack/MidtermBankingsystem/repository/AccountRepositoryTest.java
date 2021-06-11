@@ -42,7 +42,7 @@ class AccountRepositoryTest {
         Account account2 = new CreditCard(AccountStatus.FROZEN, BigDecimal.valueOf(100000), owner1);
         accountRepository.save(account2);
 
-        Account account3 = new Saving(BigDecimal.valueOf(90),7889654, AccountStatus.ACTIVE, owner1);
+        Account account3 = new Saving(BigDecimal.valueOf(90),7889654, AccountStatus.ACTIVE, admin1);
         accountRepository.save(account3);
         System.out.println(account3.getId());
 

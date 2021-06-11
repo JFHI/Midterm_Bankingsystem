@@ -45,7 +45,6 @@ public class Checking extends Account {
         BigDecimal vgl = new BigDecimal(250);
         if (balance.compareTo(BigDecimal.valueOf(250))<0){
            super.setBalance(balance.subtract(getPenaltyFee()));
-            System.out.println();
         } else{
             super.setBalance(balance);
         }

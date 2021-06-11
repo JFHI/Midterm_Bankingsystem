@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @DiscriminatorColumn(name="account_type",
         discriminatorType = DiscriminatorType.STRING)
 
-public abstract class Account {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,7 +22,7 @@ public abstract class Account {
 
     private Integer secretKey = Utils.RandomSecretKey();
 
-    private BigDecimal balance = BigDecimal.valueOf(0);
+    private BigDecimal balance;
     private BigDecimal penaltyFee = BigDecimal.valueOf(40);
     private BigDecimal interestRate;
 

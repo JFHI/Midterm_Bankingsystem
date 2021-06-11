@@ -1,25 +1,31 @@
 package com.ironhack.MidtermBankingsystem.controller;
 
 import com.ironhack.MidtermBankingsystem.controller.dto.AccountStatusDTO;
+import com.ironhack.MidtermBankingsystem.controller.dto.CheckingDTO;
 import com.ironhack.MidtermBankingsystem.enums.AccountStatus;
 import com.ironhack.MidtermBankingsystem.model.Account;
 import com.ironhack.MidtermBankingsystem.repository.AccountRepository;
+import com.ironhack.MidtermBankingsystem.service.impl.AccountService;
 import com.ironhack.MidtermBankingsystem.service.interfaces.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
 public class AccountController {
 
     @Autowired
-    private AccountRepository accountRepository;
+    AccountRepository accountRepository;
 
     @Autowired
-    private IAccountService accountService;
+    IAccountService iaccountService;
+
+    @Autowired
+    AccountService accountService;
 
     @GetMapping("/accounts")
     @ResponseStatus(HttpStatus.OK)
@@ -39,8 +45,12 @@ public class AccountController {
         accountService.updateStatus(id, accountStatusDTO);
     }
 
-//    @PutMapping ("/accounts/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void update(@PathVariable Integer id), @RequestBody Integer id)
+
+    //Checking Account hinzufügen > AccountChecking DTO
+    @PostMapping("/account/checking")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Account create(@RequestBody @Valid CheckingDTO checkingDTO) throws ParseException {
+        return accountService.create(checkingDTO);
+    }
 
 }
